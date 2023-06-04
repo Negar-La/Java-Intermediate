@@ -2,7 +2,7 @@
 * The Software Guild
 * Copyright (C) 2020 Wiley edu LLC - All Rights Reserved
 *********************************/
-package com.tsg.unittesting.strings;
+package StatelessUnitTesting.src.main.java.com.tsg.unittesting.strings;
 
 /**
  *
@@ -25,6 +25,11 @@ public class StringsExerciseE {
      * @return boolean
      */
     public static boolean containsTheOther(String one, String two){
-        throw new UnsupportedOperationException("Code not yet written...!");
+        if(one.equals(two)){
+            return false;
+        } else if(one.contains(two) || two.contains(one)){
+            return true;
+        }
+        return false;
     }
 }
