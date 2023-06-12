@@ -1,12 +1,10 @@
 package JavaDateTime;
 
-import java.time.LocalDate;
-import java.time.Period;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
+import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 public class JavaDateTime {
     public static void main(String[] args) {
@@ -14,9 +12,12 @@ public class JavaDateTime {
         LocalDate ld = LocalDate.now();
         System.out.println(ld);
         //__________________________________
+
         // object containing the date represented by a well-formed ISO-8601 string = YYYY-MM-DD
-        ld = LocalDate.parse("2013-12-20");
-        System.out.println(ld);
+        ld = LocalDate.parse("1985-12-13");
+        System.out.println(ld);         //1985-12-13
+        String ldFormatted = ld.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL));
+        System.out.println(ldFormatted);    //Friday, December 13, 1985
 
         //minusDays__________________________________
 
@@ -36,7 +37,7 @@ public class JavaDateTime {
         System.out.println(diff);   //P-2D  -2 days
         System.out.println(diff.getDays());     //-2
 
-        //Period  until__________________________________
+        //plusMonths  until__________________________________
 
         LocalDate ld4 = LocalDate.now();
         LocalDate ld5 = ld4.plusMonths(11);
@@ -53,7 +54,7 @@ public class JavaDateTime {
         String formatted = ld.format(DateTimeFormatter.ofPattern("MM=dd/==yyyy"));
         System.out.println(formatted);
 
-        //toString__________________________________
+        //toString   parse__________________________________
 
         //to convert LocatDate object to String format so that you can store it in some place
         String isoDate = ld.toString();
@@ -68,15 +69,29 @@ public class JavaDateTime {
          ld4 = LocalDate.now();
         formatted = ld4.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL));
         String formatted2 = ld4.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT));
-        System.out.println(formatted);      //Sunday, June 11, 2023  Full localized format
+        System.out.println(formatted);      //Sunday, June 11, 2023  =Full localized format
         System.out.println(formatted2);     // 6/11/23
 
-        //____________________________
+        //LocalDateTime__________________________________
+
+        LocalDateTime ldt = LocalDateTime.now();
+        System.out.println(ldt);        //2023-06-12T13:16:35.788893300
+        formatted = ldt.format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss"));
+        System.out.println(formatted);      //2023-06-12 01:23:33
+
+        //legacyDate  GregorianCalendar ____________________________
         Date legacyDate = new Date();
         System.out.println(legacyDate);     //Sun Jun 11 21:36:34 EDT 2023
 
-        ZonedDateTime zdt = ZonedDateTime.ofInstant(
-                legacyDate.toInstant(), ZoneId.systemDefault());
+        GregorianCalendar legacyCalender = new GregorianCalendar(); // instantiate a Gregorian calendar object for now
+        System.out.println(legacyCalender);  // a list of different properties
+
+        ZonedDateTime zdt2 = legacyCalender.toZonedDateTime();
+        LocalDate y = zdt2.toLocalDate();
+        System.out.println(y);
+
+        // ZonedDateTime____________________________
+        ZonedDateTime zdt = ZonedDateTime.ofInstant(legacyDate.toInstant(), ZoneId.systemDefault());
 
         System.out.println(zdt);
 
