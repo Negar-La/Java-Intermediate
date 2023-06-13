@@ -34,18 +34,31 @@ public class BirthDAYCalculator {
         int monthValue = origBirthday.getMonthValue();     //12
         //System.out.println(monthValue);
 
-        String newDateAsString = currentYear + "-"+ monthValue+ "-" + dayOfMonth;
-        System.out.println(newDateAsString);
+        String  newDateAsString;
+
+        if(monthValue < 10 && dayOfMonth < 10) {            //  06/06/2000
+              newDateAsString = "0" + monthValue + "/" +  "0" + dayOfMonth + "/" + currentYear;
+        }else if(monthValue < 10 ) {                        //  06/11/2000
+            newDateAsString = "0" + monthValue + "/" + dayOfMonth + "/" + currentYear;
+        }else if(dayOfMonth < 10 ) {                        //  10/01/2000
+        newDateAsString =monthValue + "/" + "0" + dayOfMonth + "/" + currentYear;
+        }else {
+            newDateAsString = monthValue + "/"+dayOfMonth + "/" + currentYear;
+        }
+
         LocalDate thisBirthday = LocalDate.parse(newDateAsString, formatter);  //2023-12-13
-        //System.out.println(newDate);
-/*
+        //System.out.println(thisBirthday);
+
+
         DayOfWeek dayOnThisYear = thisBirthday.getDayOfWeek();
 
         System.out.println("This year it falls on a "+ dayOnThisYear+ "...\n");
 
 //Next, tell them what day it is today & the number of days until their next birthday...
         long days = ChronoUnit.DAYS.between(today, thisBirthday);
-
+        if(days < 0) {
+            days = days + 366;
+        }
 
         System.out.println("And since today is " + today+ ", there's " + days + " days until the next one!\n");
 
@@ -55,6 +68,6 @@ public class BirthDAYCalculator {
 
         System.out.println("Bet yer excited to be turning " + years + "!");
 
- */
+
     }
 }
