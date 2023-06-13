@@ -1,6 +1,5 @@
-package BirthDAYCalculator;
+package JavaDateTime;
 
-import java.io.FilterOutputStream;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.Period;
