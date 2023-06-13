@@ -1,6 +1,7 @@
 package Enum.CoinValue;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Scanner;
 
 public class App {
@@ -37,13 +38,13 @@ public class App {
     public static int calculateChange(Coin c, BigDecimal amount){
         switch (c){
             case QUARTER:
-                return amount.divide(new BigDecimal("0.25")).intValue();
+                return amount.divide(new BigDecimal("0.25"), RoundingMode.HALF_UP).intValue();
             case DIME:
-                return amount.divide(new BigDecimal("0.10")).intValue();
+                return amount.divide(new BigDecimal("0.10"), RoundingMode.HALF_UP).intValue();
             case NICKEL:
-                return amount.divide(new BigDecimal("0.05")).intValue();
+                return amount.divide(new BigDecimal("0.05"), RoundingMode.HALF_UP).intValue();
             case PENNY:
-                return amount.divide(new BigDecimal("0.01")).intValue();
+                return amount.divide(new BigDecimal("0.01"), RoundingMode.HALF_UP).intValue();
             default:
                 throw new UnsupportedOperationException();
         }

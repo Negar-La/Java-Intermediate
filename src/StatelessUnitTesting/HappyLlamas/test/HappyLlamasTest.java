@@ -1,8 +1,8 @@
-package HappyLlamas.test;
+package StatelessUnitTesting.HappyLlamas.test;
 
 import org.junit.jupiter.api.Test;
 
-import static HappyLlamas.main.HappyLlamas.areTheLlamasHappy;
+import static StatelessUnitTesting.HappyLlamas.main.HappyLlamas.areTheLlamasHappy;
 import static org.junit.jupiter.api.Assertions.*;
 
 class HappyLlamasTest {

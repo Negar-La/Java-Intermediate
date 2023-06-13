@@ -1,5 +1,8 @@
 package Enum.MathOperator;
 
+import javax.swing.*;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Scanner;
 
 public class App {
@@ -7,12 +10,12 @@ public class App {
         Scanner sc = new Scanner(System.in);
         System.out.println("Please enter operand 1:");
         boolean hasErrors = false;
-        int operand1 = 0;
-        int operand2 = 0;
+        BigDecimal operand1 = new BigDecimal("0");  //use String constructor "0"
+        BigDecimal operand2 = new BigDecimal("0");  //use String constructor "0"
 
         do {
             try {
-                operand1 = Integer.parseInt(sc.nextLine());
+                operand1 = new BigDecimal(sc.nextLine());
                 hasErrors = false;
             } catch (Exception e) {
                 System.out.println("Invalid input, please try again");
@@ -23,7 +26,7 @@ public class App {
         System.out.println("Please enter operand 2:");
         do {
             try {
-                 operand2 = Integer.parseInt(sc.nextLine());
+                 operand2 = new BigDecimal(sc.nextLine());
                 hasErrors = false;
             } catch (Exception e) {
                 System.out.println("Invalid input, please try again");
@@ -32,32 +35,32 @@ public class App {
         } while(hasErrors);
 
         System.out.println("RESULTS:");
-        int resultPlus = calculate(MathOperators.PLUS, operand1, operand2);
+        BigDecimal resultPlus = calculate(MathOperators.PLUS, operand1, operand2);
         System.out.println(operand1 + " + " + operand2 + " = " + resultPlus);
 
-        int resultMinus = calculate(MathOperators.MINUS, operand1, operand2);
+        BigDecimal resultMinus = calculate(MathOperators.MINUS, operand1, operand2);
         System.out.println(operand1 + " - " + operand2 + " = " + resultMinus);
 
-        int resultMultiply = calculate(MathOperators.MULTIPLY, operand1, operand2);
+        BigDecimal resultMultiply = calculate(MathOperators.MULTIPLY, operand1, operand2);
         System.out.println(operand1 + " * " + operand2 + " = " + resultMultiply);
 
-        int resultDivide = calculate(MathOperators.DIVIDE, operand1, operand2);
+        BigDecimal resultDivide = calculate(MathOperators.DIVIDE, operand1, operand2);
         System.out.println(operand1 + " / " + operand2 + " = " + resultDivide);
     }
 
 
-    public static int calculate(MathOperators operator, int operand1, int operand2) {
-        switch(operator) {
+    public static BigDecimal calculate(MathOperators operator, BigDecimal operand1, BigDecimal operand2) {
+        switch(operator) {   //switch on the value of the operator that is passed in
             case PLUS:
-                return operand1 + operand2;
+                return operand1.add(operand2);
             case MINUS:
-                return operand1 - operand2;
+                return operand1.subtract(operand2);
             case MULTIPLY:
-                return operand1 * operand2;
+                return operand1.multiply(operand2);
             case DIVIDE:
-                return operand1 / operand2;
+                return operand1.divide(operand2, 2, RoundingMode.HALF_UP);
             default:
-                throw new UnsupportedOperationException();
+                throw new UnsupportedOperationException("Unknown math operator");
         }
     }
 

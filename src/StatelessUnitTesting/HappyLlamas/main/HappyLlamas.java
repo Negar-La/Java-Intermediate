@@ -1,4 +1,4 @@
-package HappyLlamas.main;
+package StatelessUnitTesting.HappyLlamas.main;
 
 public class HappyLlamas {
     //hover over class name => right click => Generate => Test... !pay attention to destination package.
